@@ -16,6 +16,10 @@ const Globalstyle = createGlobalStyle`
     ul, li {
         list-style: none;
     }
+
+    article, aside, dialog, figure, footer, header, hgroup, nav, section {
+        display: block;
+    }
 `;
 
 export default Globalstyle;

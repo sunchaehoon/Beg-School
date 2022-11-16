@@ -123,7 +123,7 @@ const Main = () => {
                 <S.LoginInput
                   id="PwInput"
                   placeholder="비밀번호"
-                  type="text"
+                  type="password"
                   autoComplete="on"
                   onChange={PwChange}
                 />
