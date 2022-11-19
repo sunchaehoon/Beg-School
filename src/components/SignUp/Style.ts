@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
-type SchInput = {
-    display: string;
-}
+// type SchInput = {
+//     display: string;
+// }
 
 export const Wrap = styled.div`
     height: 100vh;
@@ -82,5 +82,9 @@ export const SearchSchBtn = styled.button`
     color: #fff;
     text-align: center;
     cursor: pointer;
-    display: ${(props: SchInput) => props.display};
+`;
+
+export const InputDiv = styled.div`
+    position: absolute;
+    
 `;

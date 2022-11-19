@@ -1,8 +1,9 @@
 import axios from "axios";
-import React, { useCallback, useEffect, useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
-import { json } from "stream/consumers";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { API } from "../../API";
+import { useForm } from "react-hook-form";
+import Modal from "../SchoolModal/Modal";
 import * as S from "./Style";
 
 const SignUp = () => {
@@ -17,7 +18,7 @@ const SignUp = () => {
   const [cityCode, setCityCode] = useState<string>();
   const [schoolCode, setSchoolCode] = useState<number>();
 
-  const [schoolBtn, setSchoolBtn] = useState<string>("none");
+  const [showModal, setShowModal] = useState<boolean>(false);
 
   let [inputs, setInputs] = useState({
     id: '',
@@ -41,17 +42,11 @@ const SignUp = () => {
         ...inputs,  //기존의 input 객체 복사
         [name]: value   //name 키를 가진 값을 value로 설정
     });
-    if (value === 'null' || value === '') {
-        setSchoolBtn("none");
-      } else {
-        setSchoolBtn("block");
-      }
-      setSchValue(value);
   };
 
-  useEffect(() => {
-    console.log(schValue);
-  },[schValue]);
+  // useEffect(() => {
+  //   console.log(schValue);
+  // },[schValue]);
 
   const onSubmit = () => {
     axios({
@@ -84,12 +79,19 @@ const SignUp = () => {
       });
   };
 
-  
+  function SearchSchModal() {
+    setShowModal((prev) => !prev);
+  }
   
 
-  return (
+  return (  
     <>
       <S.Wrap>
+        {
+          showModal === true
+          ? <Modal showModalClick={SearchSchModal} />
+          : null
+        }
         <S.Header>
           <S.SchIcon onClick={clickIcon} />
           <S.SignupText>회원가입</S.SignupText>
@@ -101,18 +103,16 @@ const SignUp = () => {
               <S.InnerRow>
                 <S.InputTitle>1. 학교는 어디입니까</S.InputTitle>
                 <S.InputForm
-                  placeholder="ex)광주소프트웨어마이스터고등학교"
                   type="text"
                   name="schoolName"
-                  onChange={InputChange}
-                  value={schValue || ''}
+                  readOnly
                 />
-                <S.SearchSchBtn display={schoolBtn} onClick={SearchSch}>검색</S.SearchSchBtn>
+                <S.SearchSchBtn onClick={SearchSchModal}>검색</S.SearchSchBtn>
               </S.InnerRow>
               <S.InnerRow>
                 <S.InputTitle>2. 당신은 몇 학년 입니까</S.InputTitle>
                 <S.InputForm
-                  placeholder="(2학년 = ) 2"
+                  placeholder="(2학년) = 2"
                   type="text"
                   name="grade"
                   onChange={InputChange}
@@ -121,7 +121,7 @@ const SignUp = () => {
               <S.InnerRow>
                 <S.InputTitle>3. 당신은 몇 반 입니까</S.InputTitle>
                 <S.InputForm
-                  placeholder="(2반 = ) 2"
+                  placeholder="(2반) = 2"
                   type="text"
                   name="class"
                   onChange={InputChange}
@@ -130,7 +130,6 @@ const SignUp = () => {
               <S.InnerRow>
                 <S.InputTitle>4. 당신의 이름을 적으시오</S.InputTitle>
                 <S.InputForm
-                  placeholder="ex)김철수"
                   type="text"
                   name="name"
                   onChange={InputChange}

@@ -97,11 +97,11 @@ const Main = () => {
       <S.Wrap>
         <S.Header>
           <S.Title>학교를 부탁해</S.Title>
-          <S.Regist>
+          {/* <S.Regist>
             <ul>
               <S.RegistLi><Link to='/SignUp' className="link">회원가입</Link></S.RegistLi>
             </ul>
-          </S.Regist>
+          </S.Regist> */}
         </S.Header>
 
         <S.LoginForm>
@@ -132,6 +132,7 @@ const Main = () => {
 
               <S.LoginBtn onClick={SubmitLogin}>로그인</S.LoginBtn>
               <ToastContainer />
+              <Link to='/SignUp' className="link">회원가입</Link>
             </S.LoginSection>
           </S.FormSize>
         </S.LoginForm>

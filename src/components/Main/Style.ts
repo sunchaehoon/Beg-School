@@ -63,6 +63,7 @@ export const LoginSection = styled.div`
     padding-top: 70px;
     width: 500px;
     height: 350px;
+    position: relative;
 `;
 
 export const IdDiv = styled.div`
@@ -104,7 +105,7 @@ export const LoginBtn = styled.button`
     width: 30px;
     height: 40px;
     width: 150px;
-    margin-top: 30px;
+    margin-top: 50px;
     border-radius: 5px;
     cursor: pointer;
 `;
