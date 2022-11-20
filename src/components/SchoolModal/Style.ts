@@ -53,16 +53,15 @@ export const InputForm = styled.input`
 `;
 
 export const SchoolLists = styled.div`
-    width: 70%;
+    width: 75%;
     border: 1px solid gray;
     border-radius: 7px;
     height: 330px;
     margin: 0 auto;
-    position: relative;
+    overflow: auto;
 `;
 
 export const SchoolList = styled.div`
-    position: absolute;
     width: 100%;
     height: 40px;
     font-size: 19px;

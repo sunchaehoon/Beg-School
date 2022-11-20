@@ -15,18 +15,23 @@ const Modal = ({ showModalClick }: any) => {
     showModalClick();
   }
 
-  //   useEffect(() => {
-  //     setSchValue(inputValue.value);
-  //     console.log(schValue);
-  //   },[setSchValue]);
+    useEffect(() => {
+      console.log(schValue);
+    },[schValue]);
 
   const InputChange = (e: any) => {
+    function ClickSchool() {
+      setSchValue(e.target.value);
+      showModalClick();
+    }
+
     const { value, name } = e.target;
     setInputs({
       ...inputs,
       [name]: value,
     });
-    console.log(value);
+    setSchValue(value);
+    console.log(schValue);
 
     API.get("/school", {
       params: {
@@ -40,15 +45,18 @@ const Modal = ({ showModalClick }: any) => {
         // setSchoolCode(res.data.row[0].schoolCode);    //7380292
         setSchoolList(
           res.data.row.map((school: any, i: number) => {
-            return <S.SchoolList>{school[i].schoolName}</S.SchoolList>;
+            return (
+              <S.SchoolList key={i} onClick={ClickSchool}>
+                {res.data.row[i].schoolName}
+              </S.SchoolList>
+            );
           })
         );
       })
       .catch((error) => {
-        console.error(error);
+        console.error(error.response.data);
       });
   };
-  
 
   return (
     <>
@@ -64,9 +72,7 @@ const Modal = ({ showModalClick }: any) => {
               value={schValue}
             />
           </S.InnerRow>
-          <S.SchoolLists>
-            {schoolList}
-          </S.SchoolLists>
+          <S.SchoolLists>{schoolList}</S.SchoolLists>
         </S.ModalScr>
       </S.ModalWrap>
     </>

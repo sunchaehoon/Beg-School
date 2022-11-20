@@ -5,7 +5,6 @@ import styled from "styled-components";
 // }
 
 export const Wrap = styled.div`
-    height: 100vh;
     width: 100%;
     min-width: 1100px;
 `;
@@ -25,6 +24,7 @@ export const SchIcon = styled.div`
     margin: 30px 0 0 45px;
     background: url('/assists/schicon.png');
     background-size: 100%;
+    cursor: pointer;
 `;
 
 export const SignupText = styled.div`
@@ -35,8 +35,7 @@ export const SignupText = styled.div`
 `;
 
 export const SignupWrap = styled.div`
-    height: 100%;
-    padding: 130px 100px 200px;
+    padding: 130px 100px 100px;
 `;
 
 export const FormContainer = styled.div`
@@ -86,5 +85,19 @@ export const SearchSchBtn = styled.button`
 
 export const InputDiv = styled.div`
     position: absolute;
-    
+`;
+
+export const JoinWrap = styled.div`
+    text-align: center;
+    padding-top: 20px;
+`;
+
+export const JoinButton = styled.button`
+    border: 3.5px solid gray;
+    height: 40px;
+    width: 40%;
+    background-color: transparent;
+    border-radius: 7px;
+    font-size: 18px;
+    cursor: pointer;
 `;

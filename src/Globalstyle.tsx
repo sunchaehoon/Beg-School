@@ -20,6 +20,11 @@ const Globalstyle = createGlobalStyle`
     article, aside, dialog, figure, footer, header, hgroup, nav, section {
         display: block;
     }
+
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
 `;
 
 export default Globalstyle;

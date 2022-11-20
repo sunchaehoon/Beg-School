@@ -48,17 +48,16 @@ const SignUp = () => {
   //   console.log(schValue);
   // },[schValue]);
 
-  const onSubmit = () => {
-    axios({
-      url: "/auth/signUp",
-      method: "post",
-      data: {
-        id: { idValue },
-        password: { pwValue },
-        phone: { numberValue },
-        schoolName: { schValue },
-      },
-    });
+  const FormSubmit = () => {
+    API
+      .post('/auth/signUp', {
+        data: {
+          id: { idValue },
+          password: { pwValue },
+          phone: { numberValue },
+          schoolName: { schValue },
+        },
+      })
   };
 
   const SearchSch = () => {
@@ -156,6 +155,10 @@ const SignUp = () => {
                 <S.InputTitle>8. 비밀번호를 다시 적으시오</S.InputTitle>
                 <S.InputForm type="password" />
               </S.InnerRow>
+
+              <S.JoinWrap>
+                <S.JoinButton onClick={FormSubmit}>가입하기</S.JoinButton>
+              </S.JoinWrap>
             </S.FormWrapper>
           </S.FormContainer>
         </S.SignupWrap>
