@@ -9,6 +9,7 @@ export const HeaderWrap = styled.div`
     justify-content: center;
     align-items: center;
     background-color: #d9d9d9;
+    min-width: 1100px;
 `;
 
 export const SchIcon = styled.div`
@@ -27,7 +28,11 @@ export const NavLi = styled.li`
         margin-left: 0;
     }
     font-size: 22px;
-    margin-left: 25px;
+    margin-left: 30px;
+`;
+
+export const OnNavLi = styled(NavLi)`
+    color: #3333FF;
 `;
 
 

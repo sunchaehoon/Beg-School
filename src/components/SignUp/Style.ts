@@ -6,6 +6,7 @@ import styled from "styled-components";
 
 export const Wrap = styled.div`
     width: 100%;
+    height: 100vh;
     min-width: 1100px;
 `;
 
@@ -15,6 +16,7 @@ export const Header = styled.div`
     width: 100%;
     background: white;
     z-index: 2;
+    min-width: 1100px;
 `;
 
 export const SchIcon = styled.div`
@@ -31,7 +33,7 @@ export const SignupText = styled.div`
     font-size: 35px;
     display: flex;
     justify-content: center;
-    margin-top: 40px;
+    margin-top: 20px;
 `;
 
 export const SignupWrap = styled.div`
@@ -89,7 +91,6 @@ export const InputDiv = styled.div`
 
 export const JoinWrap = styled.div`
     text-align: center;
-    padding-top: 20px;
 `;
 
 export const JoinButton = styled.button`
@@ -100,4 +101,12 @@ export const JoinButton = styled.button`
     border-radius: 7px;
     font-size: 18px;
     cursor: pointer;
+    margin-top: 20px;
+`;
+
+export const WrongPw = styled.div`
+    color: red;
+    font-size: 14px;
+    position: absolute;
+    top: 70px;
 `;

@@ -1,11 +1,13 @@
 import React from 'react';
 import Header from '../Header/Header';
+import * as S from './Style';
 
 const Cafeteria = () => {
     return (
         <>
-            
-            <Header />
+            <S.Wrapper>
+                <Header />
+            </S.Wrapper>
         </>
     );
 };

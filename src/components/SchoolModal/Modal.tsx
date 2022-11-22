@@ -3,10 +3,13 @@ import React, { useEffect, useState } from "react";
 import { API } from "../../API";
 import * as S from "./Style";
 
-const Modal = ({ showModalClick }: any) => {
+const Modal = ({
+  showModalClick,
+  setSchName,
+  setCityCode,
+  setSchoolCode,
+}: any) => {
   const [schValue, setSchValue] = useState<string>("");
-  const [cityCode, setCityCode] = useState();
-  const [schoolCode, setSchoolCode] = useState();
   const [schoolList, setSchoolList] = useState();
 
   let [inputs, setInputs] = useState({ schoolName: "", name: "" });
@@ -15,38 +18,27 @@ const Modal = ({ showModalClick }: any) => {
     showModalClick();
   }
 
-    useEffect(() => {
-      console.log(schValue);
-    },[schValue]);
-
-  const InputChange = (e: any) => {
-    function ClickSchool() {
-      setSchValue(e.target.value);
+  useEffect(() => {
+    function onClickSchool(e: any) {
+      setSchName(e.schoolName);
+      setCityCode(e.cityCode);
+      setSchoolCode(e.schoolCode);
       showModalClick();
     }
 
-    const { value, name } = e.target;
-    setInputs({
-      ...inputs,
-      [name]: value,
-    });
-    setSchValue(value);
-    console.log(schValue);
-
     API.get("/school", {
       params: {
-        schoolName: value,
+        schoolName: inputs.schoolName,
       },
     })
       .then((res) => {
-        // setSchoolList(res.data);
-        // setSchValue(res.data.row[0].schoolName);    //광주소프트웨어마이스터고등학교
-        // setCityCode(res.data.row[0].cityCode);    //F10
-        // setSchoolCode(res.data.row[0].schoolCode);    //7380292
         setSchoolList(
           res.data.row.map((school: any, i: number) => {
             return (
-              <S.SchoolList key={i} onClick={ClickSchool}>
+              <S.SchoolList
+                key={i}
+                onClick={() => onClickSchool(res.data.row[i])}
+              >
                 {res.data.row[i].schoolName}
               </S.SchoolList>
             );
@@ -56,6 +48,14 @@ const Modal = ({ showModalClick }: any) => {
       .catch((error) => {
         console.error(error.response.data);
       });
+  }, [inputs]);
+
+  const InputChange = (e: any) => {
+    const { value, name } = e.target;
+    setInputs({
+      ...inputs,
+      [name]: value,
+    });
   };
 
   return (
@@ -69,7 +69,6 @@ const Modal = ({ showModalClick }: any) => {
               placeholder="학교를 입력하세요"
               name="schoolName"
               onChange={InputChange}
-              value={schValue}
             />
           </S.InnerRow>
           <S.SchoolLists>{schoolList}</S.SchoolLists>
