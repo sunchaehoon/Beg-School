@@ -33,7 +33,7 @@ export const SignupText = styled.div`
     font-size: 35px;
     display: flex;
     justify-content: center;
-    margin-top: 20px;
+    margin-top: 50px;
 `;
 
 export const SignupWrap = styled.div`

@@ -87,6 +87,7 @@ const SignUp = () => {
       grade: gradeValue,
       name: stdName,
     });
+    localStorage.setItem('username', stdName);
     alert("회원가입 되었습니다");
     navigate("/");
   };

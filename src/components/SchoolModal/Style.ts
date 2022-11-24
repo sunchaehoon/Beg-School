@@ -1,9 +1,5 @@
 import styled from "styled-components";
 
-type ShowModal = {
-    display: string;
-}
-
 export const ModalWrap = styled.div`
     display: flex;
     justify-content: center;

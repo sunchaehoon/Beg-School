@@ -3,11 +3,13 @@ import * as S from "./Style";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./style.css";
 import { API } from "../../API";
 
 const Main = () => {
+  const navigate =  useNavigate();
+
   const [userId, setUserId] = useState("");
   const [userPw, setUserPw] = useState("");
   const [delIdinput, setDelIdinpt] = useState("none");
@@ -70,10 +72,17 @@ const Main = () => {
 
     API.post("/auth/login", {
       id: userId,
-      pw: userPw,
+      password: userPw,
     })
       .then((res) => {
-        
+        console.log(res);
+        if(res.data === true) {
+          localStorage.setItem('userid', userId);
+          alert(localStorage.getItem('username') + '님 로그인');
+          navigate('/Cafeteria');
+        } else {
+          alert('로그인 실패');
+        }
       })
       .catch((error) => {
         console.error(error);

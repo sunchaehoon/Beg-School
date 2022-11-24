@@ -13,7 +13,7 @@ export const HeaderWrap = styled.div`
 `;
 
 export const SchIcon = styled.div`
-    position: absolute;
+    position: fixed;
     width: 80px;
     height: 90px;
     margin: 0 0 0 45px;
