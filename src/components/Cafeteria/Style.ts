@@ -1,5 +1,9 @@
 import styled from "styled-components";
 
+type SetColor = {
+    color: string;
+}
+
 export const Wrapper = styled.div`
     width: 100%;
     min-width: 1100px;
@@ -29,8 +33,14 @@ export const ModeLi = styled.li`
     }
     display: inline-block;
     margin-left: 30px;
-    color: #3333ff;
+    color: ${(props: SetColor) => props.color};
     cursor: pointer;
+    font-weight: bold;
+`;
+
+export const FoodList = styled.div`
+    width: 100%;
+    position: relative;
 `;
 
 export const TitleText = styled.div`
@@ -40,12 +50,38 @@ export const TitleText = styled.div`
 `;
 
 export const LeftArrow = styled.div`
-    width: 40px;
-    height: 40px;
+    width: 45px;
+    height: 45px;
     cursor: pointer;
     position: absolute;
-    
+    top: 160px;
 `;
+
+export const RightArrow = styled(LeftArrow)`
+    right: 0;
+`;
+
+export const FoodDiv = styled.div`
+    height: 400px;
+    padding: 0 45px;
+    display: flex;
+    justify-content: space-between;
+`;
+
+export const FoodDivM = styled(FoodDiv)`
+    padding: 0
+`;
+
+export const OneMeal = styled.div`
+    width: 30%;
+    height: 100%;
+    text-align: center;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+`;
+
+
 
 
 
