@@ -69,7 +69,8 @@ export const FoodDiv = styled.div`
 `;
 
 export const FoodDivM = styled(FoodDiv)`
-    padding: 0
+    padding: 30px 0 0 0;
+    display: block;
 `;
 
 export const OneMeal = styled.div`
@@ -79,6 +80,39 @@ export const OneMeal = styled.div`
     font-size: 20px;
     display: flex;
     align-items: center;
+    justify-content: center;
+`;
+
+export const WeekUl = styled.ul`
+    width: 100%;
+    display: table;
+`;
+
+export const WeekLi = styled.li`
+    line-height: 45px;
+    background: #f8f8f8;
+    text-align: center;
+    font-weight: bold;
+    color: #000;
+    font-size: 15px;
+    display: table-cell;
+    border-left: 1px #ddd solid;
+    :first-child {
+        border-left: none;
+    }
+`;
+
+export const DayList = styled.ul`
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+`;
+
+export const DayListLi = styled.li`
+    display: table-cell;
+    position: relative;
+    border-top: 1px #ddd solid;
+    border-left: 1px #ddd solid;
 `;
 
 

@@ -4,10 +4,13 @@ import Header from "../Header/Header";
 import * as S from "./Style";
 
 const Cafeteria = () => {
-  const date = new Date();
-  const year = date.getFullYear();
-  const month = date.getMonth() + 1;
-  const day = date.getDate();
+  
+  const today = {
+    year: new Date().getFullYear(), //오늘 연도
+    month: new Date().getMonth() + 1, //오늘 월
+    date: new Date().getDate(), //오늘 날짜
+    day: new Date().getDay(), //오늘 요일
+  };
 
   const [morning, setMorning] = useState("");
   const [afternoon, setAfternoon] = useState("");
@@ -15,16 +18,28 @@ const Cafeteria = () => {
 
   const [dayFood, setDayFood] = useState<boolean>(true);
 
-  const [dday, setDday] = useState<number>(day);
+  const [dday, setDday] = useState<number>(today.date);
+  const [mmonth, setMmonth] = useState<number>(today.month);
 
-  const prevMonth = String(year) + String(month);
+  const prevMonth = String(today.year) + String(today.month);
 
-  const [today, setToday] = useState<string>(
-    String(year) + String(month) + String(day)
+  const [todaydate, setTodaydate] = useState<string>(
+    String(today.year) + String(today.month) + String(today.date)
   );
 
+  const [daymeal, setDaymeal] = useState();
+
+//   const Calendar = () => {
+    
+//     const week = ["일", "월", "화", "수", "목", "금", "토"]; //일주일
+//     const [selectedYear, setSelectedYear] = useState(today.year); //현재 선택된 연도
+//     const [selectedMonth, setSelectedMonth] = useState(today.month); //현재 선택된 달
+//     const dateTotalCount = new Date(selectedYear, selectedMonth, 0).getDate(); //선택된 연도, 달의 마지막 날짜
+//   };
+
   useEffect(() => {
-    const prevDay = today;
+    const prevDay = todaydate;
+    console.log(prevDay);
     API.get("/school/meal", {
       headers: {
         id: localStorage.getItem("userid"),
@@ -35,24 +50,37 @@ const Cafeteria = () => {
     })
       .then((res) => {
         console.log(res.data.row);
-        setMorning(res.data.row[0].dishName);
-        setAfternoon(res.data.row[1].dishName);
-        setDinner(res.data.row[2].dishName);
+        if (res.data.row[0] !== undefined) {
+          setMorning(res.data.row[0].dishName);
+        } else {
+          setMorning("급식없음");
+        }
+        if (res.data.row[1] !== undefined) {
+          setAfternoon(res.data.row[1].dishName);
+        } else {
+          setAfternoon("급식없음");
+        }
+        if (res.data.row[2] !== undefined) {
+          setDinner(res.data.row[2].dishName);
+        } else {
+          setDinner("급식없음");
+        }
       })
       .catch((error) => {
         console.error(error.response.data);
       });
 
-    //   API.get("/school/meal/month", {
-    //     headers: {
-    //         id: localStorage.getItem("userid"),
-    //     },
-    //     params: {
-    //         month: prevMonth,
-    //     }
-    //   })
+    // API.get("/school/meal/month", {
+    //   headers: {
+    //     id: localStorage.getItem("userid"),
+    //   },
+    //   params: {
+    //     month: prevMonth,
+    //   },
+    // })
     //   .then((res) => {
     //     console.log(res.data.row);
+    //     setDaymeal(res.data.row.map((a: any, i: number) => {}));
     //   })
     //   .catch((error) => {
     //     console.error(error.response.data);
@@ -60,14 +88,17 @@ const Cafeteria = () => {
 
     // console.log(prevDay);
     // console.log(prevMonth);
-  }, [today, prevMonth]);
+  }, [todaydate, prevMonth]);
 
   const DecreaseDay = () => {
-    setToday(String(Number(today) - 1));
+    setTodaydate(String(Number(todaydate) - 1));
     setDday(dday - 1);
+    if (dday < 1) {
+
+    }
   };
   const IncreaseDay = () => {
-    setToday(String(Number(today) + 1));
+    setTodaydate(String(Number(todaydate) + 1));
     setDday(dday + 1);
   };
 
@@ -98,8 +129,8 @@ const Cafeteria = () => {
 
             <S.TitleText>
               {dayFood === true
-                ? month + "월 " + dday + "일 " + "급식"
-                : month + "월 급식"}
+                ? today.month + "월 " + dday + "일 " + "급식"
+                : today.month + "월 급식"}
             </S.TitleText>
 
             <S.FoodList>
@@ -140,15 +171,34 @@ const Cafeteria = () => {
                   </S.RightArrow>
 
                   <S.FoodDiv>
-                    <S.OneMeal dangerouslySetInnerHTML={{ __html: morning }} />
                     <S.OneMeal
+                      id="morning"
+                      dangerouslySetInnerHTML={{ __html: morning }}
+                    />
+                    <S.OneMeal
+                      id="afternoon"
                       dangerouslySetInnerHTML={{ __html: afternoon }}
                     />
-                    <S.OneMeal dangerouslySetInnerHTML={{ __html: dinner }} />
+                    <S.OneMeal
+                      id="dinner"
+                      dangerouslySetInnerHTML={{ __html: dinner }}
+                    />
                   </S.FoodDiv>
                 </>
               ) : (
-                <S.FoodDivM></S.FoodDivM>
+                <S.FoodDivM>
+                  <S.WeekUl>
+                    <S.WeekLi>월요일</S.WeekLi>
+                    <S.WeekLi>화요일</S.WeekLi>
+                    <S.WeekLi>수요일</S.WeekLi>
+                    <S.WeekLi>목요일</S.WeekLi>
+                    <S.WeekLi>금요일</S.WeekLi>
+                  </S.WeekUl>
+
+                  <S.DayList>
+                    <S.DayListLi></S.DayListLi>
+                  </S.DayList>
+                </S.FoodDivM>
               )}
             </S.FoodList>
           </S.FoodWrapper>
