@@ -20,14 +20,15 @@ const Cafeteria = () => {
 
   const [dday, setDday] = useState<number>(today.date);
   const [mmonth, setMmonth] = useState<number>(today.month);
+  const [yyear, setYyear] = useState<number>(today.year);
 
   const prevMonth = String(today.year) + String(today.month);
 
-  const [todaydate, setTodaydate] = useState<string>(
-    String(today.year) + String(today.month) + String(today.date)
-  );
-
   const [daymeal, setDaymeal] = useState();
+  
+  const prevdate: Date = new Date();
+  const prevdate1 = new Date(prevdate.getFullYear(), mmonth, 0).getDate();
+  const prevdate2 = new Date(prevdate.getFullYear(), mmonth - 1, 0).getDate();
 
 //   const Calendar = () => {
     
@@ -35,11 +36,12 @@ const Cafeteria = () => {
 //     const [selectedYear, setSelectedYear] = useState(today.year); //현재 선택된 연도
 //     const [selectedMonth, setSelectedMonth] = useState(today.month); //현재 선택된 달
 //     const dateTotalCount = new Date(selectedYear, selectedMonth, 0).getDate(); //선택된 연도, 달의 마지막 날짜
-//   };
+//   }
 
   useEffect(() => {
-    const prevDay = todaydate;
-    console.log(prevDay);
+    const prevDay = String(yyear) + String(mmonth) + String(dday);
+    console.log(dday);
+    console.log(prevdate1);
     API.get("/school/meal", {
       headers: {
         id: localStorage.getItem("userid"),
@@ -88,19 +90,25 @@ const Cafeteria = () => {
 
     // console.log(prevDay);
     // console.log(prevMonth);
-  }, [todaydate, prevMonth]);
+  }, [today, dday, prevMonth]);
 
   const DecreaseDay = () => {
-    setTodaydate(String(Number(todaydate) - 1));
-    setDday(dday - 1);
-    if (dday < 1) {
-
+    if (dday <= 1) {
+      setMmonth(mmonth - 1);
+      setDday(prevdate2);
+    } else {
+      setDday(dday - 1);
     }
   };
   const IncreaseDay = () => {
-    setTodaydate(String(Number(todaydate) + 1));
-    setDday(dday + 1);
+    if(dday >= prevdate1) {
+      setMmonth(mmonth + 1);
+      setDday(1);
+    } else {
+      setDday(dday + 1);
+    }
   };
+
 
   return (
     <>
@@ -129,7 +137,7 @@ const Cafeteria = () => {
 
             <S.TitleText>
               {dayFood === true
-                ? today.month + "월 " + dday + "일 " + "급식"
+                ? mmonth + "월 " + dday + "일 " + "급식"
                 : today.month + "월 급식"}
             </S.TitleText>
 

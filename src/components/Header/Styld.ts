@@ -20,6 +20,7 @@ export const SchIcon = styled.div`
     background: url('/assists/schicon.png');
     background-size: 100%;
     z-index: 1;
+    cursor: pointer;
 `
 
 export const NavLi = styled.li`

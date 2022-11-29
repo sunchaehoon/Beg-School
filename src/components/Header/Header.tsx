@@ -1,13 +1,14 @@
 import React from 'react';
 import * as S from './Styld';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Header = () => {
     const baseurl = "http://localhost:3000";
+    const navigate =  useNavigate();
 
     return (
         <>
-            <S.SchIcon />
+            <S.SchIcon onClick={() => {navigate('/')}} />
             <S.HeaderWrap>
                 <ul>
                     {
