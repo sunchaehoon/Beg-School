@@ -18,30 +18,30 @@ const Cafeteria = () => {
 
   const [dayFood, setDayFood] = useState<boolean>(true);
 
-  const [dday, setDday] = useState<number>(today.date);
-  const [mmonth, setMmonth] = useState<number>(today.month);
-  const [yyear, setYyear] = useState<number>(today.year);
+  const [dday, setDday] = useState<any>(today.date);
+  const [mmonth, setMmonth] = useState<any>(today.month);
+  const [yyear, setYyear] = useState<any>(today.year);
 
   const prevMonth = String(today.year) + String(today.month);
-
-  const [daymeal, setDaymeal] = useState();
   
   const prevdate: Date = new Date();
-  const prevdate1 = new Date(prevdate.getFullYear(), mmonth, 0).getDate();
+  const enddate = new Date(prevdate.getFullYear(), mmonth, 0).getDate();
   const prevdate2 = new Date(prevdate.getFullYear(), mmonth - 1, 0).getDate();
 
-//   const Calendar = () => {
-    
-//     const week = ["일", "월", "화", "수", "목", "금", "토"]; //일주일
-//     const [selectedYear, setSelectedYear] = useState(today.year); //현재 선택된 연도
-//     const [selectedMonth, setSelectedMonth] = useState(today.month); //현재 선택된 달
-//     const dateTotalCount = new Date(selectedYear, selectedMonth, 0).getDate(); //선택된 연도, 달의 마지막 날짜
-//   }
 
   useEffect(() => {
-    const prevDay = String(yyear) + String(mmonth) + String(dday);
+    let ddday = String(dday);
+    let mmmonth = String(mmonth);
+    if(ddday.length === 1) {
+      ddday = "0" + ddday;
+    }
+    if(mmmonth.length === 1) {
+      mmmonth = "0" + mmmonth;
+    }
+    const prevDay = String(yyear) + mmmonth + ddday;
     console.log(dday);
-    console.log(prevdate1);
+    console.log(prevDay);
+    console.log(enddate);
     API.get("/school/meal", {
       headers: {
         id: localStorage.getItem("userid"),
@@ -101,7 +101,7 @@ const Cafeteria = () => {
     }
   };
   const IncreaseDay = () => {
-    if(dday >= prevdate1) {
+    if(dday >= enddate) {
       setMmonth(mmonth + 1);
       setDday(1);
     } else {

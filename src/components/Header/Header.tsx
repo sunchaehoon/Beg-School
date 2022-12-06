@@ -32,6 +32,9 @@ const Header = () => {
                         : <S.NavLi><Link to='/Community'>커뮤니티</Link></S.NavLi>
                     }
                 </ul>
+                <S.Logout onClick={() => {
+                    navigate('/');
+                }}>로그아웃</S.Logout>
             </S.HeaderWrap>
         </>
     );

@@ -87,7 +87,9 @@ const SignUp = () => {
       grade: gradeValue,
       name: stdName,
     });
-    localStorage.setItem('username', stdName);
+    console.log(idValue);
+    console.log(stdName);
+    localStorage.setItem(idValue, stdName);
     alert("회원가입 되었습니다");
     navigate("/");
   };
@@ -111,6 +113,7 @@ const SignUp = () => {
       setShowWrongPw(true);
     }
   });
+
 
   return (
     <>

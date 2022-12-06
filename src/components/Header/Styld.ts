@@ -36,5 +36,12 @@ export const OnNavLi = styled(NavLi)`
     color: #3333FF;
 `;
 
+export const Logout = styled.div`
+    position: absolute;
+    right: 0;
+    padding: 25px 70px 0 0;
+    cursor: pointer;
+`;
+
 
 
