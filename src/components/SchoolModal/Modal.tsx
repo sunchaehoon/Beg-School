@@ -8,9 +8,11 @@ const Modal = ({
   setSchName,
   setCityCode,
   setSchoolCode,
+  setSchoolClass
 }: any) => {
   const [schValue, setSchValue] = useState<string>("");
   const [schoolList, setSchoolList] = useState();
+  
 
   let [inputs, setInputs] = useState({ schoolName: "", name: "" });
 
@@ -23,13 +25,14 @@ const Modal = ({
       setSchName(e.schoolName);
       setCityCode(e.cityCode);
       setSchoolCode(e.schoolCode);
+      setSchoolClass(e.schoolClass);
       showModalClick();
     }
 
     API.get("/school", {
       params: {
-        schoolName: inputs.schoolName,
-      },
+        schoolName: inputs.schoolName
+      }
     })
       .then((res) => {
         setSchoolList(

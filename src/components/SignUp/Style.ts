@@ -110,3 +110,10 @@ export const WrongPw = styled.div`
     position: absolute;
     top: 70px;
 `;
+
+export const SelectSch = styled.div`
+    position: relative;
+    margin: 25px 0 25px 0;
+`;
+
+

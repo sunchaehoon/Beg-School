@@ -78,7 +78,7 @@ const Main = () => {
         console.log(res);
         if(res.data === true) {
           console.log(userId);
-          localStorage.setItem('userid',userId);
+          localStorage.setItem('userid', userId);
           alert(localStorage.getItem(userId) + '님 로그인');
           navigate('/Cafeteria');
         } else {

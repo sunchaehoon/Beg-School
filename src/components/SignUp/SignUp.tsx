@@ -11,6 +11,7 @@ const SignUp = () => {
   const [schName, setSchName] = useState("");
   const [cityCode, setCityCode] = useState<string>("");
   const [schoolCode, setSchoolCode] = useState<number>();
+  const [schoolClass, setSchoolClass] = useState("");
 
   const [classValue, setClassValue] = useState<number>(0);
   const [gradeValue, setGradeValue] = useState<number>(0);
@@ -86,9 +87,11 @@ const SignUp = () => {
       class: classValue,
       grade: gradeValue,
       name: stdName,
+      schoolClass: schoolClass
     });
     console.log(idValue);
     console.log(stdName);
+    console.log(schoolClass);
     localStorage.setItem(idValue, stdName);
     alert("회원가입 되었습니다");
     navigate("/");
@@ -123,6 +126,7 @@ const SignUp = () => {
             setSchName={setSchName}
             setCityCode={setCityCode}
             setSchoolCode={setSchoolCode}
+            setSchoolClass={setSchoolClass}
             showModalClick={SearchSchModal}
           />
         ) : null}
@@ -139,9 +143,11 @@ const SignUp = () => {
                 <S.InputForm
                   type="text"
                   name="schoolName"
-                  value={schName || ""}
+                  value={schName}
                   readOnly
                 />
+                <S.SelectSch>
+                </S.SelectSch>
                 <S.SearchSchBtn onClick={SearchSchModal}>검색</S.SearchSchBtn>
               </S.InnerRow>
               <S.InnerRow>
